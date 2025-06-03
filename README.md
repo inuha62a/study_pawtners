@@ -191,3 +191,9 @@ https://www.notion.com/ja
 
 【通知機能(検討中)】  
 - LINE API
+
+## ■画面遷移図
+https://www.figma.com/design/2V4CNd7uJv4jca9ICQX6M2/Study-Pawtners?node-id=0-1&p=f&t=pAJP7SQXJwE2SusY-0
+
+## ■ER図
+https://app.diagrams.net/?src=about#G1_HntngHCEvKRYykbMSlqACRA6CFfl-DC#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D
