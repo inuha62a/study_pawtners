@@ -50,3 +50,6 @@ group :development do
   gem "web-console"
 end
 
+# ユーザー認証
+gem "devise"
+gem "devise-i18n"
