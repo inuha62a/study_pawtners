@@ -71,5 +71,4 @@ end
 
 
 class RegistrationsController < Devise::RegistrationsController
- 
 end
