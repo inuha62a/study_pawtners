@@ -4,6 +4,7 @@ class StudyRecordsController < ApplicationController
   before_action :set_learning_items, only: [ :edit, :update ]
 
   def index
+    @user = current_user
     @search_form = StudySearchForm.new(search_params)
     @studies = @search_form.search(current_user)
   end

@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
-      @articles = @search_form.search
+      @articles = @search_form.search(current_user)
     end
 
     def show
