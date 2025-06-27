@@ -2,7 +2,7 @@ class LearningItemsController < ApplicationController
     before_action :set_learning_item, only: [ :edit, :update, :destroy, :toggle_complete ]
     before_action :set_status, only: [ :index, :toggle_complete ]
     before_action :set_learning_items, only: [ :index, :toggle_complete ]
-  
+
     def index
       @status = params[:status] || "incomplete"
       @learning_item = LearningItem.new
@@ -12,12 +12,12 @@ class LearningItemsController < ApplicationController
         format.html
       end
     end
-  
+
     def create
       @status = params[:status] || "incomplete"
       @learning_item = LearningItem.new(learning_item_params)
       @learning_items = LearningItem.where(completed: @status == "complete") # 追加 ✅
-  
+
       if @learning_item.save
         flash.now[:notice] = "追加しました"
         # Turbo Stream 対応テンプレートがあればここで処理
@@ -25,14 +25,14 @@ class LearningItemsController < ApplicationController
         render :index, status: :unprocessable_entity
       end
     end
-  
+
     def edit
       respond_to do |format|
         format.turbo_stream # ← このとき edit.turbo_stream.erb を探しにいく
         format.html
       end
     end
-  
+
     def update
       @status = "incomplete" # ← デフォルトで未完了タブに戻す
       if @learning_item.update(learning_item_params)
@@ -54,7 +54,7 @@ class LearningItemsController < ApplicationController
         end
       end
     end
-  
+
     def destroy
       # 他のStudyRecordと関連づいていたら削除しない（任意）
       @prevent_deletion = @learning_item.learning_studies.exists?
@@ -65,13 +65,13 @@ class LearningItemsController < ApplicationController
         flash.now[:notice] = "削除しました"
       end
     end
-  
+
     def toggle_complete
       @learning_item.update(completed: !@learning_item.completed)
-  
+
       @current_status = params[:status] || "incomplete"
       flash.now[:notice] = "ステータスを切り替えました"
-  
+
       # respond_to do |format|
       #   format.turbo_stream {
       #     render "learning_items/toggle_complete", formats: [:turbo_stream], locals: { status: current_status }
@@ -81,23 +81,22 @@ class LearningItemsController < ApplicationController
       #   }
       # end
     end
-  
+
     private
-  
+
     def set_learning_item
       @learning_item = LearningItem.find(params[:id])
     end
-  
+
     def set_status
       @status = params[:status] || "incomplete"
     end
-  
+
     def set_learning_items
       @learning_items = LearningItem.where(completed: @status == "complete")
     end
-  
+
     def learning_item_params
       params.require(:learning_item).permit(:name)
     end
-  end
-  
+end
