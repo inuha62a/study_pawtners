@@ -7,7 +7,7 @@ class ArticleSearchForm
 
     def search(params = {})
       scope = Article.distinct  # ← これで解決！
-  
+
       if keyword.present?
         scope = scope
           .left_outer_joins(:comments)  # ← コメントと外部結合
