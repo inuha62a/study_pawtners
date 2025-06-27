@@ -3,11 +3,11 @@ class ArticleSearchForm
     include ActiveModel::Attributes
 
     attribute :keyword, :string
-    attribute :category, :integer
+    attribute :category, :string
 
-    def search
-      scope = Article.all
-
+    def search(params = {})
+      scope = Article.distinct  # ← これで解決！
+  
       if keyword.present?
         scope = scope
           .left_outer_joins(:comments)  # ← コメントと外部結合
@@ -15,7 +15,7 @@ class ArticleSearchForm
             "articles.title LIKE :kw OR comments.body LIKE :kw",
             kw: "%#{keyword}%"
           )
-          .distinct  # ← 重複排除（コメントが複数ある記事）
+          .distinct  # ← 実はここは不要になります
       end
 
       scope = scope.where(category: category) if category.present?
