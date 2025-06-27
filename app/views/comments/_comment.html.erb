@@ -7,8 +7,9 @@
 
   <p><%= comment.body %></p>
 
-  <% if comment.image.attached? %>
-    <p><%= image_tag comment.image, class: "img-thumbnail", size: "200x200" %></p>
+   <% if @comment.image.attached? %>
+    <p>現在の画像：</p>
+    <%= image_tag @comment.image.variant(resize_to_limit: [300, 300]) %>
   <% end %>
 
   <div class="d-flex gap-2">
