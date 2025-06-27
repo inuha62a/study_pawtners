@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_26_140729) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_27_071757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,31 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_26_140729) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "learning_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "learning_studies", force: :cascade do |t|
+    t.bigint "study_record_id", null: false
+    t.bigint "learning_item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["learning_item_id"], name: "index_learning_studies_on_learning_item_id"
+    t.index ["study_record_id"], name: "index_learning_studies_on_study_record_id"
+  end
+
+  create_table "study_records", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_study_records_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
@@ -82,4 +107,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_26_140729) do
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "learning_studies", "learning_items"
+  add_foreign_key "learning_studies", "study_records"
+  add_foreign_key "study_records", "users"
 end

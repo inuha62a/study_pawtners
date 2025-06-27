@@ -1,0 +1,2 @@
+class LearningItem < ApplicationRecord
+end
