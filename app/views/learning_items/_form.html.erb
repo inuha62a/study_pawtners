@@ -1,0 +1,11 @@
+<div>
+  <%= form_with model: learning_item, url: learning_items_path do |form| %>
+    <%= link_to "学習記録一覧へ戻る", study_records_path %>
+    <div>
+      <%= form.label :name, "項目名" %><br>
+      <%= form.text_field :name %>
+      <%= hidden_field_tag :status, status, id: "input_hidden_status" %>
+      <%= form.submit "追加" %>
+    </div>
+  <% end %>
+</div>
