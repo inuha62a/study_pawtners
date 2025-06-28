@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     passwords: "users/passwords"
   }
   get "users/profile" => "users#show"
-  resources :articles do
+  resources :articles
   
   resources :study_records
   resources :learning_items do
