@@ -12,8 +12,7 @@ Rails.application.routes.draw do
   }
   get "users/profile" => "users#show"
   resources :articles do
-    resources :comments, only: [ :create, :edit, :update, :destroy ]
-  end
+  
   resources :study_records
   resources :learning_items do
     member do
