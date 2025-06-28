@@ -5,8 +5,9 @@ class ArticleSearchForm
     attribute :keyword, :string
     attribute :category, :string
 
-    def search(params = {})
-      scope = Article.distinct  # ← これで解決！
+    def search(current_user)
+      scope = current_user.articles.distinct  # ← ユーザーの記事のみ
+      # keywordやcategoryでの絞り込み処理
 
       if keyword.present?
         scope = scope
@@ -15,7 +16,6 @@ class ArticleSearchForm
             "articles.title LIKE :kw OR comments.body LIKE :kw",
             kw: "%#{keyword}%"
           )
-          .distinct  # ← 実はここは不要になります
       end
 
       scope = scope.where(category: category) if category.present?
