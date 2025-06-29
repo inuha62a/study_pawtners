@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # Active Storageのテーブルが存在するか確認
-      storage_tables = ActiveRecord::Base.connection.tables.select { |t| t.include?('storage') || t.include?('blob') }
-      render plain: "Storage tables: #{storage_tables}"
+      # データベースに存在するテーブル一覧を確認
+      all_tables = ActiveRecord::Base.connection.tables
+      render plain: "All tables: #{all_tables}"
     end
 
     def show
