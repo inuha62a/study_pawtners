@@ -6,14 +6,29 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # まずは基本的な情報確認
-      debug_info = {
-        user_present: @user.present?,
-        articles_table_exists: ActiveRecord::Base.connection.table_exists?('articles'),
-        user_articles_count: @user&.articles&.count || 0
-      }
+      # 記事が存在しないので、まずは作成してみる
+      if @user.articles.count == 0
+        # テスト用記事を作成してみませんか？
+        test_article = @user.articles.build(
+          title: "テスト記事",
+          # その他必要な属性...
+        )
+        
+        creation_result = test_article.save
+        debug_info = {
+          article_created: creation_result,
+          validation_errors: test_article.errors.full_messages
+        }
+      else
+        # 既存記事でenumを確認
+        article = @user.articles.first
+        debug_info = {
+          article_title: article.title,
+          # enumの状態を確認
+        }
+      end
       
-      render plain: "Debug info: #{debug_info}"
+      render plain: "Test result: #{debug_info}"
     end
 
     def show
