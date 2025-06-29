@@ -5,11 +5,10 @@ class ArticlesController < ApplicationController
 
     def index
       @user = current_user
-      @search_form = ArticleSearchForm.new(search_params)
       
-      # searchメソッドの最初の処理を直接実行
-      scope = current_user.articles.distinct
-      render plain: "Scope class: #{scope.class}, Count: #{scope.count}"
+      # Userモデルの関連付けメソッドが存在するか確認
+      has_articles_method = current_user.respond_to?(:articles)
+      render plain: "User has articles method: #{has_articles_method}"
     end
 
     def show
