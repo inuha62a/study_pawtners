@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # データベースのarticlesテーブルの構造を確認
-      columns = Article.column_names
-      render plain: "Article columns: #{columns}"
+      # Active Storageのテーブルが存在するか確認
+      storage_tables = ActiveRecord::Base.connection.tables.select { |t| t.include?('storage') || t.include?('blob') }
+      render plain: "Storage tables: #{storage_tables}"
     end
 
     def show
