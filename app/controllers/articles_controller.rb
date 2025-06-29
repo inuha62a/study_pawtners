@@ -6,15 +6,15 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # Articleレコードを1件作成してみる
-      begin
-        article = Article.create!(title: "テスト記事", user: @user)
-        render plain: "Article created successfully! ID: #{article.id}"
-      rescue => e
-        render plain: "Error creating article: #{e.message}"
-      end
+      # 環境情報を確認
+      env_info = {
+        rails_env: Rails.env,
+        active_storage_service: Rails.application.config.active_storage.service
+      }
+      
+      render plain: "Environment: #{env_info}"
     end
-
+    
     def show
       @article = Article.find(params[:id])
       @comment = Comment.new
