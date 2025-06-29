@@ -6,9 +6,13 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # データベースに存在するテーブル一覧を確認
-      all_tables = ActiveRecord::Base.connection.tables
-      render plain: "All tables: #{all_tables}"
+      # Articleレコードを1件作成してみる
+      begin
+        article = Article.create!(title: "テスト記事", user: @user)
+        render plain: "Article created successfully! ID: #{article.id}"
+      rescue => e
+        render plain: "Error creating article: #{e.message}"
+      end
     end
 
     def show
