@@ -6,7 +6,10 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
-      render plain: "ArticleSearchForm created with search_params"
+      @articles = @search_form.search.page(params[:page]).per(10)
+      
+      # 元のレンダリングに戻す
+      render :index
     end
 
     def show
