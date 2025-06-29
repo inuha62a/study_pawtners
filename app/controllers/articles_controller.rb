@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # Userモデルの関連付けメソッドが存在するか確認
-      has_articles_method = current_user.respond_to?(:articles)
-      render plain: "User has articles method: #{has_articles_method}"
+      # Articleテーブル自体にアクセスできるか確認
+      total_articles = Article.count
+      render plain: "Total articles in database: #{total_articles}"
     end
 
     def show
