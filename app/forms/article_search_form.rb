@@ -1,10 +1,9 @@
 class ArticleSearchForm
     include ActiveModel::Model
-    # include ActiveModel::Attributes
+    include ActiveModel::Attributes
 
-    attr_accessor :keyword, :category
-    # attribute :keyword, :string
-    # attribute :category, :string
+    attribute :keyword, :string
+    attribute :category, :string
 
     def search(current_user)
       scope = current_user.articles.distinct  # ← ユーザーの記事のみ
