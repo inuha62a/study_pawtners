@@ -5,13 +5,8 @@ class ArticlesController < ApplicationController
 
     def index
       @user = current_user
-      
-      # ArticleSearchFormクラスが存在するかチェック
-      if defined?(ArticleSearchForm)
-        render plain: "ArticleSearchForm class exists"
-      else
-        render plain: "ArticleSearchForm class NOT found"
-      end
+      @search_form = ArticleSearchForm.new
+      render plain: "ArticleSearchForm created without params"
     end
 
     def show
