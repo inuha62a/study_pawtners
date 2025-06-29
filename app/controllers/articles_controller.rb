@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
     before_action :correct_user!, only: [ :edit, :update, :destroy ]
 
     def index
-      @user = current_user
+      @search_form = ArticleSearchForm.new(search_params)
       render plain: "Articles index is working!"
     end
 
