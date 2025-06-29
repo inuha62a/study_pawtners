@@ -7,9 +7,9 @@ class ArticlesController < ApplicationController
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
       
-      # 引数を渡してsearchメソッドを実行
-      search_result = @search_form.search(current_user)
-      render plain: "Search with current_user: #{search_result.class}"
+      # current_userの記事を直接確認
+      articles_count = current_user.articles.count
+      render plain: "Articles count: #{articles_count}"
     end
 
     def show
