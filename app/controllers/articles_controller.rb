@@ -5,9 +5,8 @@ class ArticlesController < ApplicationController
 
     def index
       @user = current_user
-      empty_params = {}
-      @search_form = ArticleSearchForm.new(empty_params)
-      render plain: "ArticleSearchForm created with empty hash"
+      @search_form = ArticleSearchForm.new(search_params)
+      render plain: "ArticleSearchForm created with search_params"
     end
 
     def show
