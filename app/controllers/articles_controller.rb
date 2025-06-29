@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # Articleテーブル自体にアクセスできるか確認
-      total_articles = Article.count
-      render plain: "Total articles in database: #{total_articles}"
+      # データベースのarticlesテーブルの構造を確認
+      columns = Article.column_names
+      render plain: "Article columns: #{columns}"
     end
 
     def show
