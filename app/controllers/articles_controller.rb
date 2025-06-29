@@ -7,8 +7,9 @@ class ArticlesController < ApplicationController
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
       
-      # まずcurrent_userを確認
-      render plain: "current_user: #{current_user.inspect}"
+      # 引数を渡してsearchメソッドを実行
+      search_result = @search_form.search(current_user)
+      render plain: "Search with current_user: #{search_result.class}"
     end
 
     def show
