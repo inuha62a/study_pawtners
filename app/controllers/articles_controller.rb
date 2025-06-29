@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
     def index
       @search_form = ArticleSearchForm.new(search_params)
+      @articles = @search_form.search(current_user)
       render plain: "Articles index is working!"
     end
 
