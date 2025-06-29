@@ -5,30 +5,21 @@ class ArticlesController < ApplicationController
 
     def index
       @user = current_user
+      article = @user.articles.first
       
-      # 記事が存在しないので、まずは作成してみる
-      if @user.articles.count == 0
-        # テスト用記事を作成してみませんか？
-        test_article = @user.articles.build(
-          title: "テスト記事",
-          # その他必要な属性...
-        )
-        
-        creation_result = test_article.save
-        debug_info = {
-          article_created: creation_result,
-          validation_errors: test_article.errors.full_messages
-        }
-      else
-        # 既存記事でenumを確認
-        article = @user.articles.first
-        debug_info = {
-          article_title: article.title,
-          # enumの状態を確認
-        }
-      end
+      # enumの動作を詳しく確認してみましょう
+      enum_info = {
+        article_title: article.title,
+        current_category: article.category,
+        current_status: article.status,
+        # enumで生成されるメソッドを試してみませんか？
+        is_draft: article.draft?,
+        is_published: article.published?,
+        is_error_log: article.error_log?,
+        is_ai_prompt: article.ai_prompt?
+      }
       
-      render plain: "Test result: #{debug_info}"
+      render plain: "Enum test: #{enum_info}"
     end
 
     def show
