@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
     before_action :correct_user!, only: [ :edit, :update, :destroy ]
 
     def index
+      @user = current_user
       render plain: "Articles index is working!"
     end
 
