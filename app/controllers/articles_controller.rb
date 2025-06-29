@@ -6,10 +6,10 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
-      @articles = @search_form.search.page(params[:page]).per(10)
       
-      # 元のレンダリングに戻す
-      render :index
+      # searchメソッドの戻り値を確認
+      search_result = @search_form.search
+      render plain: "Search result: #{search_result.class} - #{search_result.inspect}"
     end
 
     def show
