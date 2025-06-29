@@ -5,23 +5,16 @@ class ArticlesController < ApplicationController
 
     def index
       @user = current_user
-      article = @user.articles.first
       
-      # enumの動作を詳しく確認してみましょう
-      enum_info = {
-        article_title: article.title,
-        current_category: article.category,
-        current_status: article.status,
-        # enumで生成されるメソッドを試してみませんか？
-        is_draft: article.draft?,
-        is_published: article.published?,
-        is_error_log: article.error_log?,
-        is_ai_prompt: article.ai_prompt?
-      }
+      # まずsearch_paramsの中身を確認
+      debug_params = search_params.inspect
       
-      render plain: "Enum test: #{enum_info}"
+      # ArticleSearchFormクラス自体は読み込めるか
+      form_class_exists = defined?(ArticleSearchForm)
+      
+      render plain: "Params: #{debug_params}, Class: #{form_class_exists}"
     end
-
+    
     def show
       @article = Article.find(params[:id])
       @comment = Comment.new
