@@ -6,15 +6,16 @@ class ArticlesController < ApplicationController
     def index
       @user = current_user
       
-      # 環境情報を確認
-      env_info = {
-        rails_env: Rails.env,
-        active_storage_service: Rails.application.config.active_storage.service
+      # まずは基本的な情報確認
+      debug_info = {
+        user_present: @user.present?,
+        articles_table_exists: ActiveRecord::Base.connection.table_exists?('articles'),
+        user_articles_count: @user&.articles&.count || 0
       }
       
-      render plain: "Environment: #{env_info}"
+      render plain: "Debug info: #{debug_info}"
     end
-    
+
     def show
       @article = Article.find(params[:id])
       @comment = Comment.new
