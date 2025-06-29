@@ -7,9 +7,9 @@ class ArticlesController < ApplicationController
       @user = current_user
       @search_form = ArticleSearchForm.new(search_params)
       
-      # current_userの記事を直接確認
-      articles_count = current_user.articles.count
-      render plain: "Articles count: #{articles_count}"
+      # searchメソッドの最初の処理を直接実行
+      scope = current_user.articles.distinct
+      render plain: "Scope class: #{scope.class}, Count: #{scope.count}"
     end
 
     def show
