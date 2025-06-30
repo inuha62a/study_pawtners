@@ -68,7 +68,3 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
-
-
-class RegistrationsController < Devise::RegistrationsController
-end

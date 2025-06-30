@@ -8,7 +8,7 @@ class StudySearchForm
       studies = studies.where("date <= ?", to) if to.present?
 
       if keyword.present?
-        studies = studies.where("body LIKE ?", "%#{keyword}%")
+        studies = studies.left_joins(:learning_items).where("study_records.body LIKE ? OR learning_items.name LIKE ? ", "%#{keyword}%", "%#{keyword}%")
       end
 
       studies.distinct
