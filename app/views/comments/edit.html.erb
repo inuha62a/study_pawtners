@@ -1,28 +1,27 @@
-<turbo-frame id="comment_<%= @comment.id %>">
-  <%= form_with(model: [@article, @comment], local: true) do |f| %>
-    <div>
-      <%= f.label :body, "本文" %><br>
-      <%= f.text_field :body %>
-    </div>
 
-    <div>
-      <%= f.label :tag, "タグ" %><br>
-      <% Comment::TAG_OPTIONS.each do |key, label| %>
-        <%= check_box_tag "comment[tag][]", key, (@comment.tag || []).include?(key.to_s), id: "comment_tag_#{key}" %>
-        <%= label_tag "comment_tag_#{key}", label %><br>
-      <% end %>
-    </div>
+  <%= form_with(model: [@article, @comment], local: true, html: { multipart: true, "data-turbo": "false" }) do |f| %>
+  <div>
+    <%= f.label :body, "本文" %><br>
+    <%= f.text_field :body %>
+  </div>
 
-    <div>
-      <%= f.label :image, "画像" %><br>
-      <%= f.file_field :image %>
-    </div>
-
-    <% if @comment.image.attached? %>
-      <p>現在の画像：</p>
-      <%= image_tag @comment.image.variant(resize_to_limit: [300, 300]) %>
+  <div>
+    <%= f.label :tag, "タグ" %><br>
+    <% Comment::TAG_OPTIONS.each do |key, label| %>
+      <%= check_box_tag "comment[tag][]", key, (@comment.tag || []).include?(key.to_s), id: "comment_tag_#{key}" %>
+      <%= label_tag "comment_tag_#{key}", label %><br>
     <% end %>
+  </div>
 
-    <%= f.submit "更新" %>
+  <div>
+    <%= f.label :image, "画像" %><br>
+    <%= f.file_field :image %>
+  </div>
+
+  <% if @comment.image.attached? %>
+    <p>現在の画像：</p>
+    <%= image_tag @comment.image.variant(resize_to_limit: [300, 300]) %>
   <% end %>
-</turbo-frame>
+
+  <%= f.submit "更新", class: "btn btn-primary mt-2" %>
+<% end %>
