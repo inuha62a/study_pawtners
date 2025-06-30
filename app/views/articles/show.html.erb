@@ -10,8 +10,7 @@
 <p>投稿者: <%= @article.user.name %></p>
 
 <%= link_to "編集", edit_article_path(@article), class: "btn btn-secondary" %>
-<%= button_to "削除", article_path(@article), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-
+<%= button_to "削除", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
 <hr>
 
 <%= form_with(model: [@article, @comment], local: true, html: { multipart: true }) do |f| %>
