@@ -12,7 +12,7 @@ class StudyRecord < ApplicationRecord
 
   private
 
-  def set_default_date
+  def set_default_date  # 日付が空白だったら自動で今日にする(保険)
     self.date ||= Date.current
   end
 end
