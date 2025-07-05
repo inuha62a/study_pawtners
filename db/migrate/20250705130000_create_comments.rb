@@ -3,6 +3,7 @@ class CreateComments < ActiveRecord::Migration[7.2]
     create_table :comments do |t|
       t.references :user, null: false, foreign_key: true
       t.references :article, null: false, foreign_key: true
+      t.references :study_record, null: false, foreign_key: true
       t.string :tag, array: true, default: []
       t.text :body
 

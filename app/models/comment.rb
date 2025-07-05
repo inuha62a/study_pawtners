@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :article
+  belongs_to :study_record
   has_one_attached :image
 
   TAG_OPTIONS = {
