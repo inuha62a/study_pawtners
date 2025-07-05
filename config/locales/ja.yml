@@ -1,3 +1,5 @@
 ja:
   defaults:
     delete_confirm: "削除しますか？"
+  study_records:
+    delete_confirm: "学習記録を削除すると、関連するコメントも削除されます。よろしいですか？"

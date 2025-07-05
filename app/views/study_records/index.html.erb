@@ -48,7 +48,7 @@
       <%= link_to "削除", study_record_path(study), 
           data: { 
             turbo_method: :delete,  # ← Rails7ではこちらを使用
-            turbo_confirm: "本当に削除してもよろしいですか？" 
+            turbo_confirm: t('study_records.delete_confirm')
           } %>
     </div>
   <% end %>
