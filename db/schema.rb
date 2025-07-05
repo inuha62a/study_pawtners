@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_27_071757) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "date"], name: "index_study_records_on_user_id_and_date", unique: true
     t.index ["user_id"], name: "index_study_records_on_user_id"
   end
 
