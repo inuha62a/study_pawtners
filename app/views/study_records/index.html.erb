@@ -30,7 +30,9 @@
 <% if @studies.present? %>
   <% @studies.each do |study| %>
     <div class="mb-4 p-3 border rounded">
-      <strong><%= study.date.strftime("%Y年%m月%d日") %></strong><br>
+      <strong>
+        <%= link_to study.date.strftime("%Y年%m月%d日"), study_record_path(study), class: "text-decoration-none text-dark" %>
+      </strong><br>
 
       <% if study.learning_items.any? %>
         <ul>
