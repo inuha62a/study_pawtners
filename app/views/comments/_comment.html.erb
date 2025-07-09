@@ -1,6 +1,8 @@
 <% return unless comment.persisted? %>
 
-<div id = "comment-<%= comment.id %>">
+<div id="comment-<%= comment.id %>">
+  <p><strong>学習日:</strong> <%= l(comment.study_record.date, format: :long) %></p>
+
   <% if comment.tag.present? %>
     <p>タグ: <%= comment.tag.map { |t| Comment::TAG_OPTIONS[t.to_sym] || t }.join(", ") %></p>
   <% end %>
