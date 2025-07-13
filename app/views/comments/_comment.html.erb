@@ -7,7 +7,7 @@
     <p>タグ: <%= comment.tag.map { |t| Comment::TAG_OPTIONS[t.to_sym] || t }.join(", ") %></p>
   <% end %>
 
-  <p><%= comment.body %></p>
+  <%= markdown(comment.body) %>
 
   <% if comment.image.attached? %>
     <p>現在の画像：</p>
