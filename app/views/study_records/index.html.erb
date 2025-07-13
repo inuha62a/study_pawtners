@@ -43,7 +43,7 @@
       <% end %>
 
       <% if study.body.present? %>
-        <p><%= simple_format(study.body) %></p>
+        <%= markdown(study.body) %>
       <% end %>
 
       <%= link_to "編集", edit_study_record_path(study), class: "btn btn-outline-secondary btn-sm mt-2" %>
