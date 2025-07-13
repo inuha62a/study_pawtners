@@ -1,7 +1,7 @@
 module ApplicationHelper
   # RedcarpetとRedcarpet::Render::Stripを読み込む
-  require 'redcarpet'
-  require 'redcarpet/render_strip'
+  require "redcarpet"
+  require "redcarpet/render_strip"
 
   # マークダウン形式のテキストをHTMLに変換するメソッド
   def markdown(text)
@@ -9,7 +9,7 @@ module ApplicationHelper
     render_options = {
       filter_html:     true,  # HTMLタグのフィルタリングを有効にする
       hard_wrap:       true,  # ハードラップを有効にする
-      link_attributes: { rel: 'nofollow', target: "_blank" },  # リンクの属性を設定する
+      link_attributes: { rel: "nofollow", target: "_blank" },  # リンクの属性を設定する
       space_after_headers: true,  # ヘッダー後のスペースを有効にする
       fenced_code_blocks: true  # フェンス付きコードブロックを有効にする
     }
