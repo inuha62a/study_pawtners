@@ -9,18 +9,18 @@ class CommentsController < ApplicationController
         redirect_to @article, alert: "コメントできるのは記事作成者のみです"
         return
       end
-    
+
       # ▼ 日付から学習記録を探す or 作成
       study_date = params[:comment][:study_record_date]
       @study_record = current_user.study_records.find_or_create_by(date: study_date) do |sr|
         sr.body = "" # 新しく作るときだけ空の本文で
       end
-    
+
       @comment = @article.comments.build(comment_params)
       @comment.user = current_user
       @comment.study_record = @study_record
       @comment.tag = Array(params[:comment][:tag])
-    
+
       if @comment.save
         redirect_to @article, notice: "コメントを追加しました"
       else
