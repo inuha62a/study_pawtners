@@ -47,7 +47,6 @@ class StudyRecordsController < ApplicationController
   end
 
   def destroy
-    @study_record = current_user.study_records.find(params[:id])
     @study_record.destroy
     redirect_to study_records_path, notice: "学習記録を削除しました"
   end

@@ -1,5 +1,10 @@
 
-  <%= form_with(model: [@article, @comment], local: true, html: { multipart: true, "data-turbo": "false" }) do |f| %>
+<%= form_with(model: [@article, @comment], local: true, html: { multipart: true, "data-turbo": "false" }) do |f| %>
+  <div>
+    <%= f.label :date, "学習日（必須）" %><br>
+    <%= f.date_field :study_record_date, value: Date.current, required: true %>
+  </div>
+
   <div>
     <%= f.label :body, "本文" %><br>
     <%= f.text_field :body %>

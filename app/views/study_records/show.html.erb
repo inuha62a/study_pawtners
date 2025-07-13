@@ -5,5 +5,31 @@
 <p><strong>内容:</strong></p>
 <p><%= simple_format(@study_record.body) %></p>
 
+<hr>
+
+<h3>この学習日に投稿されたコメント</h3>
+
+<% if @study_record.comments.any? %>
+  <% @study_record.comments.each do |comment| %>
+    <div class="mb-3 p-2 border rounded">
+      <% if comment.tag.present? %>
+        <p>タグ: <%= comment.tag.map { |t| Comment::TAG_OPTIONS[t.to_sym] || t }.join(", ") %></p>
+      <% end %>
+
+      <p><%= comment.body %></p>
+
+      <% if comment.image.attached? %>
+        <%= image_tag comment.image.variant(resize_to_limit: [300, 300]) %>
+      <% end %>
+
+      <p class="text-muted">記事: <%= link_to comment.article.title, article_path(comment.article) %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>この日に投稿されたコメントはまだありません。</p>
+<% end %>
+
+<hr>
+
 <%= link_to "編集", edit_study_record_path(@study_record) %> |
 <%= link_to "一覧へ戻る", study_records_path %>

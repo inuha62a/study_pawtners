@@ -7,5 +7,8 @@ class CreateStudyRecords < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+
+    # ここに複合ユニーク制約を追加
+    add_index :study_records, [ :user_id, :date ], unique: true
   end
 end

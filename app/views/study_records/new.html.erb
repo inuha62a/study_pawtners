@@ -15,7 +15,7 @@
 <%= form_with model: @study_record, local: true do |f| %>
   <div>
     <%= f.label :date, "学習日(必須)" %>
-    <%= f.date_field :date %>
+    <%= f.date_field :date, value: (@study_record.date || Date.current), required: true %>
   </div>
 
   <% if @learning_items.any? %>

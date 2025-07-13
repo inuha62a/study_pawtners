@@ -15,6 +15,11 @@
 
 <%= form_with(model: [@article, @comment], local: true, html: { multipart: true }) do |f| %>
   <div>
+    <%= f.label :date, "学習日（必須）" %><br>
+    <%= f.date_field :study_record_date, value: Date.current, required: true %>
+  </div>
+
+  <div>
     <%= f.label :tag, "タグ" %><br>
     <% Comment::TAG_OPTIONS.each do |key, label| %>
       <%= check_box_tag "comment[tag][]", key, (@comment.tag || []).include?(key.to_s), id: "comment_tag_#{key}" %>
